@@ -1,0 +1,204 @@
+
+:where(.ff) a{color:inherit;text-decoration:none}
+:where(.ff) :is(h1,h2,h3,p,figure,blockquote,ul,ol,dl,dd,dt){margin:0;padding:0}
+:where(.ff) :is(ul,ol){list-style:none}
+:where(.ff) p{text-wrap:pretty}
+.ff *,.ff *::before,.ff *::after{box-sizing:border-box}
+.ff img{display:block;max-width:100%}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.logo{display:block;color:inherit}
+.logo svg{display:block;width:100%;height:auto}
+.menu-btn,.over{display:none}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows 180ms var(--in)}
+.qa li.on .ans{grid-template-rows:1fr;transition:grid-template-rows 260ms var(--out)}
+.qa .ans>div{overflow:hidden}
+.qa h3{font:inherit;margin:0}
+.qa button{display:flex;justify-content:space-between;align-items:center;gap:24px;width:100%;border:0;background:none;color:inherit;cursor:pointer;text-align:left}
+.qa .ico{position:relative;flex:none;width:14px;height:14px}
+.qa .ico::before,.qa .ico::after{content:"";position:absolute;left:0;right:0;top:50%;height:1.5px;margin-top:-.75px;background:currentColor}
+.qa .ico::after{transform:rotate(90deg);transition:transform 180ms var(--in)}
+.qa li.on .ico::after{transform:rotate(0deg);transition:transform 260ms var(--out)}
+[data-r]{transition:opacity 800ms var(--out) var(--d,0ms),transform 800ms var(--out) var(--d,0ms)}
+.ff[data-armed] [data-r]:not([data-in]){opacity:0;transform:translateY(14px)}
+@media (prefers-reduced-motion: reduce){
+  [data-r]{transition:opacity 300ms var(--std)}
+  .ff[data-armed] [data-r]:not([data-in]){transform:none}
+}
+
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:#FBF8F4}
+.ff{--wine:#4A0F17;--wine2:#360A10;--wine3:#5E1720;--cream:#F4E7D4;--paper:#FBF8F4;--card:#EFEAE4;--ink:#22161A;--mute:#6D615E;--line:rgba(34,22,26,.12);
+  --out:cubic-bezier(.16,1,.3,1);--in:cubic-bezier(.4,0,1,1);--std:cubic-bezier(.2,0,0,1);
+  --g:clamp(16px,3.4cqi,50px);container-type:inline-size;container-name:ff;position:relative;overflow:clip;background:var(--paper);color:var(--ink);
+  font:400 16px/1.55 var(--f-fig),system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.ff ::selection{background:var(--wine);color:var(--cream)}
+.ff :focus-visible{outline:2px solid var(--wine3);outline-offset:3px}
+.ser{font-family:var(--f-bry),Georgia,serif;font-weight:400;letter-spacing:-.015em;line-height:1.02;text-wrap:balance}
+.ser em{font-style:italic;letter-spacing:-.01em}
+.cap{font:500 12px/1 var(--f-fig),system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+
+/* pills: wine and cream, fill crossfades (200ms in, 150ms out), press 0.97 */
+.pill{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 20px;border-radius:999px;border:0;cursor:pointer;
+  font:500 12px/1 var(--f-fig),system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;transition:color 150ms var(--in),transform 120ms var(--std)}
+.pill::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--fill);opacity:0;transition:opacity 150ms var(--in)}
+.pill:hover::before,.pill:focus-visible::before{opacity:1;transition:opacity 200ms var(--out)}
+.pill:active{transform:scale(.97)}
+.p-wine{background:var(--wine);color:var(--cream);--fill:var(--wine3)}
+.p-cream{background:var(--cream);color:var(--wine);--fill:#fff}
+.p-line{background:transparent;color:var(--cream);box-shadow:inset 0 0 0 1px rgba(244,231,212,.55);--fill:rgba(244,231,212,.14)}
+
+/* floating capsule nav over the hero */
+.hd{position:absolute;z-index:6;top:20px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:28px;height:54px;padding:0 7px 0 24px;border-radius:999px;
+  background:rgba(54,10,16,.66);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 10px 30px rgba(30,4,8,.22);color:var(--cream)}
+.hd .logo{width:82px;flex:none}
+.hd .menu-btn{display:none}
+.hd nav{display:flex;gap:24px}
+.hd nav a{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap;opacity:.82;transition:opacity 150ms var(--in)}
+.hd nav a:hover,.hd nav a:focus-visible{opacity:1;transition:opacity 200ms var(--out)}
+
+/* hero: the piece on wine velvet, the line over it */
+.hero{position:relative;height:clamp(720px,62.5cqi,900px);overflow:hidden;background:radial-gradient(60% 70% at 50% 62%,#6A1A24 0,var(--wine) 52%,var(--wine2) 100%);color:var(--cream)}
+.piece{position:absolute;left:50%;bottom:-6%;width:min(62cqi,860px);aspect-ratio:1;transform:translateX(-50%);
+  -webkit-mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);mask-image:radial-gradient(closest-side,#000 58%,transparent 100%);animation:place 1800ms var(--out) both}
+.piece img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) contrast(1.04)}
+@keyframes place{from{opacity:0;transform:translateX(-50%) scale(1.06)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+.hero h1{position:relative;z-index:2;padding-top:clamp(120px,11cqi,160px);text-align:center;font-size:clamp(54px,6.7cqi,96px);color:var(--cream)}
+.ln{display:block;overflow:hidden;padding-bottom:.08em;margin-bottom:-.08em}
+.ln>span{display:block;animation:rise 1100ms var(--out) both;animation-delay:calc(260ms + var(--i,0)*50ms)}
+@keyframes rise{from{transform:translateY(105%)}to{transform:none}}
+.hero-foot{position:absolute;z-index:2;left:var(--g);right:var(--g);bottom:40px;display:flex;justify-content:space-between;align-items:end;gap:24px;animation:fade 900ms var(--out) 600ms both}
+.hero-foot p{max-width:34ch;font-size:16px;line-height:1.55;color:rgba(244,231,212,.86)}
+.hero-foot .acts{display:flex;gap:10px}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* what we buy: rounded cards */
+.buy{padding:112px var(--g) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:36px}
+.sec-h h2,.founder h2,.how h2,.faq h2{font-size:clamp(40px,3.9cqi,56px)}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;border-radius:12px;background:var(--card)}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform 220ms var(--in)}
+.card:hover img,.card:focus-visible img{transform:scale(1.04);transition:transform 280ms var(--out)}
+.card::after{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(0deg,rgba(30,8,12,.62),rgba(30,8,12,0))}
+.card .chip{position:absolute;left:16px;top:16px;z-index:2;padding:7px 11px;border-radius:999px;background:rgba(251,248,244,.86);color:var(--wine);font:600 10.5px/1 var(--f-fig),system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.card .nm{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:12px;color:var(--cream)}
+.card .nm b{font:400 30px/1 var(--f-bry),Georgia,serif;letter-spacing:-.015em}
+.card .nm span{font-size:13px;opacity:.86;text-align:right;max-width:22ch}
+
+/* two big tiles with their story laid over */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:112px var(--g) 0}
+.tile{position:relative;height:clamp(520px,46cqi,660px);overflow:hidden;border-radius:12px;color:var(--cream);background:var(--wine2)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 260ms var(--in)}
+.tile:hover img{transform:scale(1.03);transition:transform 300ms var(--out)}
+.tile::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(40,8,13,.84) 0,rgba(40,8,13,.36) 42%,rgba(40,8,13,0) 66%)}
+.tile-t{position:absolute;z-index:2;left:0;right:0;bottom:40px;padding:0 10%;text-align:center}
+.tile-t h3{font:400 clamp(34px,3.2cqi,46px)/1.04 var(--f-bry),Georgia,serif;letter-spacing:-.015em}
+.tile-t p{max-width:40ch;margin:12px auto 20px;font-size:15px;color:rgba(244,231,212,.86)}
+
+/* founder: centred words beside a rounded portrait */
+.founder{display:grid;grid-template-columns:1fr 1fr;gap:var(--g);align-items:center;padding:144px var(--g) 0}
+.founder-t{text-align:center;max-width:520px;justify-self:center}
+.founder blockquote{margin:22px auto 26px;max-width:44ch;font-size:16px;line-height:1.65;color:var(--mute)}
+.founder cite{display:block;margin:-10px 0 24px;font-style:normal;font-size:13px;color:var(--mute)}
+.founder cite b{color:var(--ink);font-weight:500}
+.founder figure{justify-self:start;width:min(100%,540px);aspect-ratio:4/5;overflow:hidden;border-radius:12px;background:var(--card)}
+.founder figure img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+
+/* how it works: four quiet cards */
+.how{padding:144px var(--g) 0}
+.how h2{text-align:center;margin-bottom:44px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.steps li{padding:30px 26px 34px;border-radius:12px;background:var(--card)}
+.steps h3{font:400 clamp(26px,2.25cqi,32px)/1.08 var(--f-bry),Georgia,serif;letter-spacing:-.015em}
+.steps p{margin-top:12px;font-size:14.5px;line-height:1.55;color:var(--mute)}
+
+/* the statement: its italic word comes up out of the paper when it arrives */
+.say{padding:144px var(--g) 0;text-align:center}
+.say p{max-width:17ch;margin:0 auto;font-size:clamp(40px,4.2cqi,60px)}
+.say em{color:#CDBDB4;transition:color 1200ms var(--out) 300ms}
+.say [data-in] em{color:var(--wine3)}
+
+/* reviews */
+.rev{padding:144px var(--g) 0}
+.rev .note{font-size:13px;color:var(--mute)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rev figure{display:flex;flex-direction:column;gap:26px;padding:30px 28px;border-radius:12px;background:var(--card)}
+.rev blockquote{font:400 22px/1.32 var(--f-bry),Georgia,serif;letter-spacing:-.01em}
+.rev figcaption{margin-top:auto;font-size:13px;color:var(--mute)}
+.rev figcaption b{color:var(--ink);font-weight:500}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--g);padding:144px var(--g) 144px}
+.faq-h p{margin:16px 0 24px;max-width:32ch;color:var(--mute)}
+.qa{display:grid;gap:8px}
+.qa li{border-radius:12px;background:var(--card)}
+.qa button{padding:20px 24px;font:500 17px/1.35 var(--f-fig),system-ui,sans-serif}
+.qa .ans p{padding:0 56px 22px 24px;font-size:15px;line-height:1.6;color:var(--mute)}
+
+/* wine footer */
+.ft{padding:96px var(--g) 28px;background:var(--wine);color:var(--cream)}
+.ft-top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--g)}
+.ft h2{font-size:clamp(46px,5cqi,72px)}
+.ft-top>div>p{max-width:40ch;margin:18px 0 28px;color:rgba(244,231,212,.82)}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--g);align-content:start}
+.cols h3{font:600 11px/1.4 var(--f-fig),system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,231,212,.6)}
+.cols ul{margin-top:14px;display:grid;gap:2px}
+.cols a,.cols span{display:inline-block;padding:5px 0;font-size:15px}
+.cols a{opacity:.9;transition:opacity 150ms var(--in)}
+.cols a:hover,.cols a:focus-visible{opacity:1;text-decoration:underline;text-underline-offset:4px;transition:opacity 200ms var(--out)}
+.cols span{color:rgba(244,231,212,.62)}
+.ft-base{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:96px;padding-top:24px;border-top:1px solid rgba(244,231,212,.18);font-size:12.5px;color:rgba(244,231,212,.62)}
+.ft-base .logo{width:96px;color:var(--cream)}
+.ft-base div{display:flex;gap:22px}
+
+/* press states: every control gives under the finger (scale 0.94–0.99, 120ms) */
+.card{transition:transform 120ms var(--std)}
+.card:active{transform:scale(.99)}
+.qa button:active{transform:scale(.99);transition:transform 120ms var(--std)}
+
+/* ---------- phone ---------- */
+@container ff (max-width: 760px){
+  .hd{left:12px;right:12px;transform:none;justify-content:space-between;padding:0 6px 0 18px;height:50px}
+  .hd nav,.hd .p-line{display:none}
+  .hd .menu-btn{display:inline-flex}
+  .over{position:fixed;top:0;left:0;right:0;bottom:0;z-index:5;display:flex;flex-direction:column;justify-content:space-between;padding:100px var(--g) 32px;background:var(--wine);color:var(--cream);opacity:0;visibility:hidden;transition:opacity 200ms var(--in),visibility 0s 200ms}
+  .ff.open .over{opacity:1;visibility:visible;transition:opacity 280ms var(--out)}
+  .over nav{display:grid;gap:4px}
+  .over nav a{font:400 40px/1.12 var(--f-bry),Georgia,serif;letter-spacing:-.015em;opacity:0;transform:translateY(12px);transition:opacity 150ms var(--in),transform 150ms var(--in)}
+  .ff.open .over nav a{opacity:1;transform:none;transition:opacity 300ms var(--out) calc(60ms + var(--i)*40ms),transform 300ms var(--out) calc(60ms + var(--i)*40ms)}
+  .hero{height:780px}
+  .hero h1{padding-top:118px;font-size:50px;padding-inline:var(--g)}
+  .piece{width:150cqi;bottom:8%}
+  .hero-foot{flex-direction:column;align-items:stretch;bottom:28px}
+  .hero-foot p{font-size:15px}
+  .hero-foot .acts{flex-direction:column}
+  .hero-foot .pill{height:46px}
+  .buy,.tiles,.founder,.how,.say,.rev{padding-top:88px}
+  .sec-h{flex-direction:column;align-items:flex-start}
+  .sec-h h2,.founder h2,.how h2,.faq h2{font-size:38px}
+  .cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 calc(var(--g)*-1);padding:0 var(--g);scroll-padding:0 var(--g)}
+  .cards::-webkit-scrollbar{display:none}
+  .card{flex:0 0 78%;scroll-snap-align:start}
+  .tiles{grid-template-columns:1fr}
+  .tile{height:520px}
+  .founder{grid-template-columns:1fr;gap:40px}
+  .founder figure{justify-self:stretch;width:auto}
+  .steps{grid-template-columns:1fr}
+  .say p{font-size:36px}
+  .rev-grid{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr;gap:28px;padding-block:88px}
+  .qa button{padding:18px 20px;font-size:16px}
+  .qa .ans p{padding:0 28px 20px 20px}
+  .ft{padding-top:72px}
+  .ft-top{grid-template-columns:1fr;gap:56px}
+  .ft h2{font-size:46px}
+  .ft-base{flex-direction:column;align-items:flex-start;margin-top:64px}
+  .ft-base div{flex-wrap:wrap;gap:8px 18px}
+}
+@media (prefers-reduced-motion: reduce){
+  .piece,.ln>span,.hero-foot{animation:none}
+  .card img,.tile img{transition:none}
+}
+
+/* menu open: the header (and its Close button) stays pinned above the overlay */
+.ff.open .hd{position:fixed;top:20px;left:12px;right:12px;transform:none}
